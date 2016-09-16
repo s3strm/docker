@@ -50,11 +50,23 @@
       }
     },
 
+    "InternetGateway": {
+      "Type" : "AWS::EC2::InternetGateway"
+    },
+
+    "VpcGateway": {
+      "Type" : "AWS::EC2::VPCGatewayAttachment",
+      "Properties" : {
+        "InternetGatewayId" : { "Ref": "InternetGateway" },
+        "VpcId" : { "Ref": "Vpc" }
+      }
+    },
+
     "Subnet": {
       "Type" : "AWS::EC2::Subnet",
       "Properties" : {
         "CidrBlock" : "10.220.0.0/24",
-        "MapPublicIpOnLaunch": "true",
+        "MapPublicIpOnLaunch": "false",
         "VpcId" : { "Ref" : "Vpc" }
       }
     },
