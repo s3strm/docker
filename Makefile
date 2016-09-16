@@ -20,11 +20,11 @@ endif
 
 deploy: keypair
 	@aws cloudformation $(ACTION)-stack    \
-		--region "$(AWS_DEFAULT_REGION)"   \
-		--stack-name "$(STACK_NAME)"       \
-		--template-body "$(TEMPLATE)"      \
-		--capabilities CAPABILITY_IAM      \
-		2>&1
+	  --region "$(AWS_DEFAULT_REGION)"   \
+	  --stack-name "$(STACK_NAME)"       \
+	  --template-body "$(TEMPLATE)"      \
+	  --capabilities CAPABILITY_IAM      \
+	  2>&1
 	@aws cloudformation wait stack-$(ACTION)-complete \
-		--stack-name $(STACK_NAME)
+	  --stack-name $(STACK_NAME)
 
