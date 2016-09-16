@@ -111,7 +111,7 @@
     "EcsAutoScalingGroup" : {
       "Type" : "AWS::AutoScaling::AutoScalingGroup",
       "Properties" : {
-        "VPCZoneIdentifier" : { "Ref" : "Subnet" },
+        "VPCZoneIdentifier" : [ { "Ref" : "Subnet" } ],
         "LaunchConfigurationName" : { "Ref" : "EcsLaunchConfiguration" },
         "MinSize" : "1",
         "MaxSize" : "1",
@@ -219,4 +219,3 @@
     }
   }
 }
-
