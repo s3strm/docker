@@ -12,6 +12,21 @@
 
     "Cluster": {
       "Type" : "AWS::ECS::Cluster"
+    },
+
+    "Vpc": {
+      "Type" : "AWS::EC2::VPC",
+      "Properties" : {
+        "CidrBlock" : "10.220.0.0/16"
+      }
+    },
+
+    "Subnet": {
+      "Type" : "AWS::EC2::Subnet",
+      "Properties" : {
+        "CidrBlock" : "10.220.0.0/24",
+        "VpcId" : { "Ref" : "Vpc" }
+      }
     }
   },
 
@@ -22,6 +37,14 @@
 
     "Repository": {
       "Value": { "Ref": "Repository" }
+    },
+
+    "Vpc": {
+      "Value": { "Ref": "Vpc" }
+    },
+
+    "Subnet": {
+      "Value": { "Ref": "Subnet" }
     }
   }
 }
