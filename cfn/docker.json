@@ -59,6 +59,24 @@
       }
     },
 
+    "EcsSecurityGroup": {
+      "Type" : "AWS::EC2::SecurityGroup",
+      "Properties" : {
+        "GroupDescription" : "s3strm ECS instances",
+        "VpcId" : { "Ref": "Vpc" },
+        "SecurityGroupEgress": {
+          "CidrIp" : "0.0.0.0/0",
+          "IpProtocol" : "-1"
+        },
+        "SecurityGroupIngress": {
+          "CidrIp" : "0.0.0.0/0",
+          "FromPort" : 22,
+          "ToPort" : 22,
+          "IpProtocol" : "tcp"
+        }
+      }
+    },
+
     "EcsRole": {
       "Type": "AWS::IAM::Role",
       "Properties": {
@@ -114,9 +132,10 @@
       "Properties" : {
         "VPCZoneIdentifier" : [ { "Ref" : "Subnet" } ],
         "LaunchConfigurationName" : { "Ref" : "EcsLaunchConfiguration" },
-        "MinSize" : "1",
+        "SecurityGroups": [ { "Ref": "EcsSecurityGroup" } ],
+        "DesiredCapacity" : "1",
         "MaxSize" : "1",
-        "DesiredCapacity" : "1"
+        "MinSize" : "1"
       },
       "CreationPolicy" : {
         "ResourceSignal" : { "Timeout" : "PT15M" }
