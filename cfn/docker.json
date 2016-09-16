@@ -2,6 +2,29 @@
   "AWSTemplateFormatVersion":"2010-09-09",
   "Description":"An ECS cluster for s3strm",
 
+  "Parameters": {
+    "InstanceType" : {
+      "Description" : "The EC2 instance type",
+      "Type" : "String",
+      "Default" : "t2.nano",
+      "AllowedValues" : [ "t2.nano", "t2.micro" ],
+      "ConstraintDescription" : "You can specify only t2.nano or t2.micro."
+    }
+  },
+
+  "Mappings" : {
+    "EcsAmi" : {
+      "us-east-1"      : { "Ami" : "ami-55870742" },
+      "us-west-1"      : { "Ami" : "ami-07713767" },
+      "us-west-2"      : { "Ami" : "ami-241bd844" },
+      "eu-west-1"      : { "Ami" : "ami-c74127b4" },
+      "eu-central-1"   : { "Ami" : "ami-3b54be54" },
+      "ap-northeast-1" : { "Ami" : "ami-2b08f44a" },
+      "ap-southeast-1" : { "Ami" : "ami-6b61bc08" },
+      "ap-southeast-2" : { "Ami" : "ami-d5b59eb6" }
+    }
+  },
+
   "Resources": {
     "Repository": {
       "Type" : "AWS::ECR::Repository",
@@ -26,6 +49,48 @@
       "Properties" : {
         "CidrBlock" : "10.220.0.0/24",
         "VpcId" : { "Ref" : "Vpc" }
+      }
+    },
+
+    "EcsRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": [ "ec2.amazonaws.com" ]
+              },
+              "Action": [ "sts:AssumeRole" ]
+            }
+          ]
+        },
+        "Path": "/",
+        "Policies": [
+          {
+            "PolicyName": "ecs-service",
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "ecs:CreateCluster",
+                    "ecs:DeregisterContainerInstance",
+                    "ecs:DiscoverPollEndpoint",
+                    "ecs:Poll",
+                    "ecs:RegisterContainerInstance",
+                    "ecs:StartTelemetrySession",
+                    "ecs:Submit*",
+                    "logs:CreateLogStream",
+                    "logs:PutLogEvents"
+                  ],
+                  "Resource": "*"
+                }
+              ]
+            }
+          }
+        ]
       }
     },
 
