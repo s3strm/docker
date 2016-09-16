@@ -167,7 +167,7 @@
       "Type" : "AWS::AutoScaling::AutoScalingGroup",
       "Properties" : {
         "VPCZoneIdentifier" : [ { "Ref" : "Subnet" } ],
-        "LaunchConfigurationName" : { "Ref" : "EcsLaunchConfiguration" },
+        "LaunchConfigurationName" : { "Ref" : "ContainerInstances" },
         "DesiredCapacity" : "1",
         "MaxSize" : "1",
         "MinSize" : "1"
@@ -186,7 +186,7 @@
       "DependsOn" : "VpcGateway"
     },
 
-   "EcsLaunchConfiguration": {
+   "ContainerInstances": {
       "Type": "AWS::AutoScaling::LaunchConfiguration",
       "Metadata" : {
         "AWS::CloudFormation::Init" : {
@@ -251,7 +251,7 @@
 
              "/opt/aws/bin/cfn-signal -e $? ",
              "  --stack ", { "Ref" : "AWS::StackName" },
-             "  --resource ECSAutoScalingGroup ",
+             "  --resource EcsAutoScalingGroup ",
              "  --region ", { "Ref" : "AWS::Region" }, "\n"
         ]]}}
       }
