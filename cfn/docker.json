@@ -27,7 +27,16 @@
         "CidrBlock" : "10.220.0.0/24",
         "VpcId" : { "Ref" : "Vpc" }
       }
+    },
+
+    "EcsInstanceProfile": {
+      "Type": "AWS::IAM::InstanceProfile",
+      "Properties": {
+        "Path": "/",
+        "Roles": [ { "Ref": "EcsRole" } ]
+      }
     }
+
   },
 
   "Outputs": {
