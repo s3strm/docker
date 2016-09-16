@@ -62,12 +62,36 @@
       }
     },
 
+    "RouteTable": {
+      "Type" : "AWS::EC2::RouteTable",
+      "Properties" : {
+        "VpcId" : { "Ref": "Vpc" }
+      }
+    },
+
+    "Route": {
+      "Type" : "AWS::EC2::Route",
+      "Properties" : {
+        "DestinationCidrBlock" : "0.0.0.0/0",
+        "GatewayId" : { "Ref": "InternetGateway" },
+        "RouteTableId" : { "Ref": "RouteTable" }
+      }
+    },
+
     "Subnet": {
       "Type" : "AWS::EC2::Subnet",
       "Properties" : {
-        "CidrBlock" : "10.220.0.0/24",
-        "MapPublicIpOnLaunch": "false",
+        "CidrBlock" : "10.220.0.0/20",
+        "MapPublicIpOnLaunch": "true",
         "VpcId" : { "Ref" : "Vpc" }
+      }
+    },
+
+    "SubnetRouteTable" : {
+      "Type" : "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties" : {
+        "SubnetId" : { "Ref" : "Subnet" },
+        "RouteTableId" : { "Ref" : "RouteTable" }
       }
     },
 
@@ -158,7 +182,8 @@
           "PauseTime" : "PT15M",
           "WaitOnResourceSignals": "true"
         }
-      }
+      },
+      "DependsOn" : "VpcGateway"
     },
 
    "EcsLaunchConfiguration": {
