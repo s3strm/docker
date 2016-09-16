@@ -1,0 +1,28 @@
+{
+  "AWSTemplateFormatVersion":"2010-09-09",
+  "Description":"An ECS cluster for s3strm",
+
+  "Resources": {
+    "Repository": {
+      "Type" : "AWS::ECR::Repository",
+      "Properties" : {
+        "RepositoryName" : "s3strm"
+      }
+    },
+
+    "Cluster": {
+      "Type" : "AWS::ECS::Cluster"
+    }
+  },
+
+  "Outputs": {
+    "Cluster": {
+      "Value": { "Ref": "Cluster" }
+    },
+
+    "Repository": {
+      "Value": { "Ref": "Repository" }
+    }
+  }
+}
+
