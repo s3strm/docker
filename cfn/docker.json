@@ -54,6 +54,7 @@
       "Type" : "AWS::EC2::Subnet",
       "Properties" : {
         "CidrBlock" : "10.220.0.0/24",
+        "MapPublicIpOnLaunch": "true",
         "VpcId" : { "Ref" : "Vpc" }
       }
     },
