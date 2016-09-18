@@ -1,6 +1,6 @@
 AWS_DEFAULT_REGION := $(shell ./bin/get_setting AWS_DEFAULT_REGION)
 STACK_NAME := $(shell ./bin/get_setting STACK_NAME)
-TEMPLATE = "file://./cfn/docker.json"
+TEMPLATE = "file://./cfn.json"
 KEYPAIR_NAME = "s3strm"
 KEYPAIR_FILE = "./keypair.pem"
 
