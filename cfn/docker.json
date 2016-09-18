@@ -32,13 +32,6 @@
   },
 
   "Resources": {
-    "Repository": {
-      "Type" : "AWS::ECR::Repository",
-      "Properties" : {
-        "RepositoryName" : "s3strm"
-      }
-    },
-
     "Cluster": {
       "Type" : "AWS::ECS::Cluster"
     },
@@ -261,10 +254,6 @@
   "Outputs": {
     "Cluster": {
       "Value": { "Ref": "Cluster" }
-    },
-
-    "Repository": {
-      "Value": { "Ref": "Repository" }
     },
 
     "Vpc": {
