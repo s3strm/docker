@@ -129,6 +129,9 @@
                 {
                   "Effect": "Allow",
                   "Action": [
+                    "ecr:BatchGetImage",
+                    "ecr:GetDownloadUrlForLayer",
+                    "ecr:GetAuthorizationToken",
                     "ecs:CreateCluster",
                     "ecs:DeregisterContainerInstance",
                     "ecs:DiscoverPollEndpoint",
@@ -137,7 +140,8 @@
                     "ecs:StartTelemetrySession",
                     "ecs:Submit*",
                     "logs:CreateLogStream",
-                    "logs:PutLogEvents"
+                    "logs:PutLogEvents",
+                    "s3:*"
                   ],
                   "Resource": "*"
                 }
