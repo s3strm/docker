@@ -9,12 +9,6 @@
       "Default" : "t2.nano",
       "AllowedValues" : [ "t2.nano", "t2.micro" ],
       "ConstraintDescription" : "You can specify only t2.nano or t2.micro."
-    },
-
-    "KeyName" : {
-      "Description" : "The EC2 instance type",
-      "Type" : "String",
-      "Default" : "s3strm"
     }
   },
 
@@ -235,7 +229,6 @@
         "ImageId" : { "Fn::FindInMap" : [ "EcsAmi", { "Ref" : "AWS::Region" }, "Ami" ] },
         "InstanceType" : { "Ref" : "InstanceType" },
         "IamInstanceProfile": { "Ref": "EcsInstanceProfile" },
-        "KeyName" : { "Ref" : "KeyName" },
         "SecurityGroups": [ { "Ref": "EcsSecurityGroup" } ],
         "UserData" : { "Fn::Base64" : { "Fn::Join" : ["", [
              "#!/bin/bash -xe\n",
