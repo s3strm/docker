@@ -1,5 +1,5 @@
 AWS_DEFAULT_REGION := $(shell ./bin/get_setting AWS_DEFAULT_REGION)
-STACK_NAME := $(shell ./bin/get_setting STACK_NAME)
+STACK_NAME := $(shell ./bin/get_setting DOCKER_STACK_NAME)
 TEMPLATE = "file://./cfn.json"
 
 ACTION := $(shell aws cloudformation describe-stacks --stack-name $(STACK_NAME) &>/dev/null && echo update || echo create)
