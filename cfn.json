@@ -6,9 +6,9 @@
     "InstanceType" : {
       "Description" : "The EC2 instance type",
       "Type" : "String",
-      "Default" : "t2.nano",
-      "AllowedValues" : [ "t2.nano", "t2.micro" ],
-      "ConstraintDescription" : "You can specify only t2.nano or t2.micro."
+      "Default" : "t2.micro",
+      "AllowedValues" : [ "t2.nano", "t2.micro", "m3.medium" ],
+      "ConstraintDescription" : "You can specify only t2.nano, t2.micro or m3.medium"
     }
   },
 
@@ -159,8 +159,8 @@
       "Properties" : {
         "VPCZoneIdentifier" : [ { "Ref" : "Subnet" } ],
         "LaunchConfigurationName" : { "Ref" : "ContainerInstances" },
-        "DesiredCapacity" : "1",
-        "MaxSize" : "1",
+        "DesiredCapacity" : "5",
+        "MaxSize" : "5",
         "MinSize" : "1"
       },
       "CreationPolicy" : {
