@@ -250,7 +250,8 @@
 
   "Outputs": {
     "Cluster": {
-      "Value": { "Ref": "Cluster" }
+      "Value": { "Ref": "Cluster" },
+      "Export" : { "Name" : "s3strm-cluster" }
     },
 
     "Vpc": {
